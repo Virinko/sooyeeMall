@@ -21,7 +21,7 @@ var _mm = {
             success : function (res) {
                 // 请求成功
                 if (0 === res.status){
-                    typeof param.success === 'function' && param.success();
+                    typeof param.success === 'function' && param.success(res.data,res.msg);
                 }
                 // 没有登录状态，需要强制登录
                 else if (10 === res.status){
@@ -32,7 +32,7 @@ var _mm = {
                     typeof param.error === 'function' && param.error(res.msg);
                 }
             },
-            error : function (err) {
+            error : function (res) {
                 typeof param.error === 'function' && param.error(res.statusText);
             }
         });
@@ -82,7 +82,7 @@ var _mm = {
     // 从哪跳出登录页，则返回哪一页，所以将当前页面的路径传过去window.location.href
     // 用encodeURIComponent对路径进行完全编码
     doLogin : function () {
-        window.location.href = './login.html?redirect=' + encodeURIComponent(window.location.href);
+        window.location.href = './user-login.html?redirect=' + encodeURIComponent(window.location.href);
     },
     goHome : function () {
         window.location.href = './index.html';
